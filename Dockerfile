@@ -14,5 +14,4 @@ FROM debian:bookworm-slim
 WORKDIR /app
 COPY --from=builder /app/server/store_server .
 EXPOSE 8080
-RUN ls /app
 CMD ["/app/store_server"]

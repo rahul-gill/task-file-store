@@ -25,6 +25,9 @@ func main() {
 	config := ServerConfig{
 		filesStoragePath: "./test_files",
 	}
+	if os.Getenv("FILE_STORAGE_PATH") != "" {
+		config.filesStoragePath = os.Getenv("FILE_STORAGE_PATH")
+	}
 	if _, err := os.Stat(config.filesStoragePath); errors.Is(err, os.ErrNotExist) {
 		err = os.Mkdir(config.filesStoragePath, 0777)
 		if err != nil {

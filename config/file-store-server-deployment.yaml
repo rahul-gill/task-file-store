@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: file-store-server
+spec:
+  replicas: 3  # Number of replicas of your pod
+  selector:
+    matchLabels:
+      app: file-store-server
+  template:
+    metadata:
+      labels:
+        app: file-store-server
+    spec:
+      containers:
+        - name: file-store-server
+          image: file_store_server:latest
+          env:
+            - name: FILE_STORAGE_PATH
+              value: /app/uploads
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: file-storage
+              mountPath: /app/uploads
+      volumes:
+        - name: file-storage
+          persistentVolumeClaim:
+            claimName: file-storage-pvc  # Link to your Persistent Volume Claim
