@@ -1,3 +1,5 @@
+Below operations can be run using the makefile
+
 #  Building
 Run these in root of project
 - `go mod download`
