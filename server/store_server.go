@@ -429,7 +429,10 @@ func getFrequentWords(config ServerConfig) (*common.WcCountServerResponse, error
 			return 0
 		}
 	})
-	log.Printf("top10Words sliced: %v", top10Words[:10])
+	if len(top10Words) > 10 {
+		top10Words = top10Words[:10]
+		log.Printf("top10Words sliced: %v", top10Words)
+	}
 
 	return &common.WcCountServerResponse{WordCountPairs: top10Words}, nil
 
